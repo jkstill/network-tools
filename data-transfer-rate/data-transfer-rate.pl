@@ -119,7 +119,7 @@ print "\n===== Recommended TCP Window Size ====\n\n";
 print "Seconds to transfer  " . commify($dataSize) .  " bytes of data for current/optimal TCP Window Sizes\n\n";
 
 foreach my $key ( sort keys %transferSeconds ) {
-	print "$key: " .  commify(sprintf('%d',$transferSeconds{$key})). "\n";
+	print "$key: " .  commify(sprintf('%6.1f',$transferSeconds{$key})). "\n";
 }
 
 print "\n";
