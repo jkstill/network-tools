@@ -1,0 +1,80 @@
+
+Oracle Linux 7.5 - Install Wireshark 2.x
+
+If you run 'yum install wireshark', Wireshark 1.x will be installed.
+
+For most protocols, that will be fine.
+
+For tracing TNS (SQL*Net "Transparent Network Substrate") with oracle 12c+, version 2 of Wireshark is required.
+Version 1 will claim all TNS packets are 'malformed'
+
+Wireshark does not supply pre-built binaries for Linux.
+
+You may find an RPM of Wireshark 2.x that will work on RedHat/Oracle/CentOS 7;  but probably not.
+
+Following are instructions I used to both install Wireshark 2 locally, as well as instructions for building an RPM
+
+=============================================================
+
+Installing Wireshark from source:
+
+Use instructions to get Wireshark 2 intalled on a single system
+
+https://github.com/wireshark/wireshark/releases
+https://github.com/wireshark/wireshark/archive/v2.6.14rc0.tar.gz
+
+yum install -y --skip-broken bison flex gtk3-devel desktop-file-utils gcc-c++ c-ares-devel libsmi-devel gnutls-devel libgcrypt-devel krb5-devel GeoIP-devel ortp-devel portaudio-devel automake autoconf libtool cmake
+yum install -y --skip-broken libpcap.x86_64
+yum install -y --skip-broken qt-devel qt5-qttools-devel.x86_64 qt5-qtsvg.x86_64 qt5-qtsvg-devel.x86_64 qt5-qtbase-devel qt5-qtmultimedia-devel qt5-linguist
+
+# could not find libpcap-devel via yum, even with EPEL enabled
+
+wget https://www.rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/libpcap-devel-1.5.3-11.el7.x86_64.rpm
+rpm -ivh libpcap-devel-1.5.3-11.el7.x86_64.rpm
+
+tar xvfz v2.6.14rc0.tar.gz
+
+cd wireshark-2.6.14rc0
+export Qt5Svg_DIR=/usr/lib64/cmake/Qt5Svg
+cmake -LH .
+make install
+
+
+###############################################################################
+
+RPM Build
+
+Use instructions to build a Wireshark 2 RPM for distribution to other systems.
+
+Requires cloning the repo
+Which required installing git
+Which required building from source as the yum repo version was only 1.8
+
+Also necessary to get the RPM build libs
+
+This too was trouble...
+
+yum install -y rpm-build.x86_64 rpm-build-libs.x86_64
+...
+
+Transaction check error:
+  file /etc/rpm/macros.ghc-srpm from install of redhat-rpm-config-9.1.0-88.0.1.el7.noarch conflicts with file from package epel-release-6-8.noarch
+
+
+Fixed this way:
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+
+Then 'yum install -y rpm-build.x86_64 rpm-build-libs.x86_64' succeeded
+
+Then it was possible to run make for the wireshark RPM
+
+This will take a long time...
+
+   [root@ora75 wireshark]# make rpm-package
+   Scanning dependencies of target rpm-package
+   Generating wireshark-2.6.14rc0-17-ga22aa7fd.tar.xz
+   Not archiving HEAD. Skipping description.
+   Creating wireshark-2.6.14rc0-17-ga22aa7fd.tar.xz
+
+
