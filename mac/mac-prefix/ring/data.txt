@@ -1,0 +1,11 @@
+AC:9F:C3	MA-L	 Global  	 United States	Ring	Ring LLC
+18:7F:88	MA-L	 Global  	 United States	Ring	Ring LLC
+34:3E:A4	MA-L	 Global  	 United States	Ring	Ring LLC
+54:E0:19	MA-L	 Global  	 United States	Ring	Ring LLC
+5C:47:5E	MA-L	 Global  	 United States	Ring	Ring LLC
+64:9A:63	MA-L	 Global  	 United States	Ring	Ring LLC
+90:48:6C	MA-L	 Global  	 United States	Ring	Ring LLC
+9C:76:13	MA-L	 Global  	 United States	Ring	Ring LLC
+CC:3B:FB	MA-L	 Global  	 United States	Ring	Ring LLC
+C4:DB:AD	MA-L	 Global  	 United States	Ring	Ring LLC
+24:2B:D6	MA-L	 Global  	 United States	Ring	Ring LLC
