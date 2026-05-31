@@ -42,7 +42,7 @@ echo "PID: $PID"
 	  Hex IP: E901A8C0
 	Hex Port: 05F1
 
- [root@poirot ~]# ./decode-port.sh
+ [root@server ~]# ./decode-port.sh
  PID: 1258868
  lrwx------ 1 jkstill jkstill 64 Dec  3 16:07 /proc/1258868/fd/10 -> 'socket:[100413043]'
  inode: 100413043
